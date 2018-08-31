@@ -1,0 +1,70 @@
+<% include public/top %>
+
+
+
+    <div class="pt5 pl20">
+        <p class="fz18 pt10 pm10 bbm mt30">
+            <%=title%>
+        </p>
+
+
+
+        <table class="table mt20 table-bordered">
+            <thead>
+                <tr>
+                    <td>id</td>
+                    <td>手机号</td>
+                    <td>昵称</td>
+                    <td>操作</td>
+                </tr>
+
+            </thead>
+            <tbody>
+                <% sd_dsf.forEach(function(user){ %>
+                    <tr>
+                        <td>
+                            <%=user.id%>
+                        </td>
+                        <td>
+                            <%=user.phone%>
+                        </td>
+                        <td>
+                            <%=user.nickName%>
+                        </td>
+                        <td>
+                            <a data-id="<%=user.id%>" class="dele_ddffxdc">删除</a>
+                        </td>
+                    </tr>
+                    <% }) %>
+            </tbody>
+        </table>
+
+    </div>
+
+
+    <% include public/bootm %>
+        <script>
+            var banner = ""
+            $(".ad_xsdffxsd_xd li").eq(4).addClass("act")
+            upimg('#d_df_sder', '/upimg', "", function(file, data) {
+                $(".df_d_drsdrt img").attr("src", data.path)
+                banner = data.path
+            })
+
+            $(".dele_ddffxdc").on("click", function() { //删除
+                var idx = $(this).attr("data-id"),
+                    sd_se = $(this)
+
+
+                ajax("/delect", {
+                    id: idx
+                }, function(data) {
+                    $(sd_se).parents("tr").remove()
+                    alert(data.msg)
+                })
+            })
+
+        </script>
+        </body>
+
+        </html>

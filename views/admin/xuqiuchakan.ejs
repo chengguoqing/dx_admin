@@ -1,0 +1,43 @@
+<% include public/top %>
+
+    <div class="pt5 pl20">
+        <p class="fz18 pt10 pm10 bbm mt30">需求查看</p>
+        <table class="table mt20 fz16 cen table-bordered">
+            <thead>
+                <tr>
+                    <td>id</td>
+                    <td>服务内容</td>
+                    <td>姓名/单位</td>
+                    <td>手机</td>
+                    <td>qq</td>
+                    <td>期限和要求</td>
+                    <td>操作</td>
+                </tr>
+            </thead>
+            <tbody class="sd_xsd_xfttc">
+                <%fis_s.map(function(a){%>
+                <tr>
+                    <td><%=a.id%></td>
+                    <td><%=a.ser_text%></td>
+                    <td><%=a.ser_name%></td>
+                    <td><%=a.ser_phone%></td>
+                    <td><%=a.ser_qq%></td>
+                    <td><%=a.ser_qixian%></td>
+                     <td><button class="btn btn-primary dsf_xsdf_xfttx">确认</button></td>
+                </tr>
+                <%})%>
+
+            </tbody>
+        </table>
+
+    </div>
+
+
+    <% include public/bootm %>
+        <script>
+            $(".ad_xsdffxsd_xd li").eq(2).addClass("act")
+
+        </script>
+        </body>
+
+        </html>

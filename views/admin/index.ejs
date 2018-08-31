@@ -1,0 +1,110 @@
+<% include public/top %>
+    <ul class="nav nav-tabs mt20" role="tablist">
+        <li role="presentation" class="active"><a href="#lunbpty" data-toggle="tab">轮播图</a></li>
+        <li role="presentation"><a href="#cheluo" data-toggle="tab">我们的承若</a></li>
+        <li role="presentation"><a href="#case_li" data-toggle="tab">经典案例</a></li>
+    </ul>
+
+    <!-- Tab panes -->
+    <div class="tab-content">
+        <div role="tabpanel" class="tab-pane active" id="lunbpty">
+            <%if(banner){banner.map(function(a,b){%>
+                <p class="sd_xdf_aadfx">
+                    <i class="fa fa-close red fz20 closd_xsfgx"></i>
+                    <img src="<%=a%>">
+                </p>
+                <% })}  %>
+
+
+
+                    <p class="qc"></p>
+
+                    <div class="mt30">
+                        <div id="filePicker">选择图片</div>
+                    </div>
+        </div>
+        <div role="tabpanel" class="tab-pane " id="cheluo">
+
+
+            <% if(cluo){cluo.map(function(a,b){%>
+                <div class="panel panel-primary sd_xsd_xdfxffx mt20">
+                    <div class="panel-heading fz16">承诺
+                        <%=b+1%>
+                    </div>
+                    <div class="panel-body">
+                        <input type="text" class="form-control dsfdsf_aasa" placeholder="标题" value="<%=a.title%>">
+                        <p class="mt10">
+                            <textarea rows="5" class="form-control dsfdsf_aasb" placeholder="内容"><%=a.text%></textarea>
+                        </p>
+                        <div class="sd_xdff_xrtx mt20">
+                            <button class="btn btn-primary fz16 que_xsd_xfa">确认</button>
+                            <button class="btn btn-danger fz16 fr que_xsd_xfb">删除</button>
+                        </div>
+
+                    </div>
+                </div>
+                <% })}%>
+                    <p class="qc d_xdd_xfttxc"></p>
+                    <div class="sd_uuy_xdf_e cen mt40">
+                        <button class="btn btn-primary fz16">添加</button>
+                    </div>
+
+
+
+        </div>
+        <div role="tabpanel" class="tab-pane " id="case_li">
+            <% if(case_li){case_li.map(function(a,b){%>
+                <div class="panel panel-primary sd_xsd_xdfxffx_b mt20">
+                    <div class="panel-heading fz16"> 经典案例 </div>
+                    <div class="panel-body">
+                        <div class="form-group mt10"> <label for="inputEmail3" class="col-sm-2 control-label dsf_xsd_xdfx">类型</label>
+                            <div class="col-sm-10">
+
+                                <select class="form-control sd_xdd_xdfgx">
+                                            <option value="1">pc</option>
+                                            <option value="2" <%=a.type==2?'selected':''%>>手机</option>
+                                        </select>
+
+                            </div>
+                        </div>
+                        <p class="qc"></p>
+                        <div class="form-group mt10"> <label for="inputEmail3" class="col-sm-2 control-label dsf_xsd_xdfx">浏览地址</label>
+                            <div class="col-sm-10"> <input type="text" class="form-control sd_xd_xfggx" placeholder="浏览地址" value="<%=a.ll_url%>"> </div>
+                        </div>
+                        <p class="qc"></p>
+                        <div class="form-group mt10"> <label for="inputEmail3" class="col-sm-2 control-label dsf_xsd_xdfx">封面</label>
+                            <div class="col-sm-10">
+                                <div class="sd_xddf_xdfgfgx pr form-control <%=a.img_url!=''?'act':''%>">
+                                    <img src="/img/copy.png" class="aa"> <img src="<%=a.img_url%>" class="ab">
+                                    <div class="d_d_xddf_er">
+                                        <div class="progress ">
+                                            <div class="progress-bar progress-bar-info progress-bar-striped" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"> </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="sd_xdff_xrtx mt20"> <button class="btn btn-primary fz16 dfsds_xdf_a">确认</button> <button class="btn btn-danger fz16 fr dfsds_xdf_b">删除</button> </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <%})}%>
+                    <p class="qc d_xdd_xfttxcxwe"></p>
+                    <div class="sd_uuy_xdf_eers cen mt40">
+                        <button class="btn btn-primary fz16">添加</button>
+                    </div>
+
+
+
+                    <div id="filePickersd">选择图片</div>
+        </div>
+
+    </div>
+    </div>
+    <% include public/bootm %>
+        <script>
+            $(".ad_xsdffxsd_xd li").eq(0).addClass("act")
+
+        </script>
+        </body>
+
+        </html>

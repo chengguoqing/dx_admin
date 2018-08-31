@@ -1,0 +1,98 @@
+<% include public/top %>
+    <!--轮播图-->
+    <div class="du_banner">
+        <div class="fullSlide">
+            <div class="bd">
+                <ul>
+                    <%for(var i=0;i<banner.length;i++) {%>
+                        <li style="background:url('<%=banner[i]%>') 50% 0px no-repeat #fff">
+
+                        </li>
+                        <%}%>
+                </ul>
+            </div>
+
+
+            <div class="hd">
+                <ul></ul>
+            </div>
+        </div>
+
+
+
+    </div>
+
+
+    <div class="wd mt20 du_xd_xdfcfx">
+        <p class="fz18 pt10 pm10 bbm pl20">我们的承诺</p>
+        <div class="sd_iuy_xsdf">
+
+            <% cluo.map(function(a,b){%>
+                <div class="sd_uyt_xsdfgx">
+                    <div class="sd_iuyyt_enr">
+                        <p class="pt10 "><i class="fa fa-check fz18 zc "></i><span class="fz18 b ml10"><%=a.title%></span></p>
+                        <p class="zc mt5 fz13 df_ssd_xftgx">
+                            <%=a.text%>
+                        </p>
+                    </div>
+                </div>
+
+                <%}) %>
+
+
+
+                    <p class="qc"></p>
+        </div>
+
+    </div>
+
+
+    <div class="wd mt20 du_xd_xdfcfx">
+        <p class="fz18 pt10 pm10 bbm pl20">经典案例</p>
+        <div class="sd_iuy_xsdf pl20 pr20 ov pm20">
+            <div class="sd_iuiu_xsdfx">
+
+                <% case_li.map(function(a,b){%>
+
+                    <div class="sd_xsd_xdfgx gd pr">
+                        <% if(a.type==1){%>
+                            <a href="<%=a.ll_url%>" target="_blank">
+                            <img src="<%=a.img_url%>">
+                        </a>
+                            <%}else if(a.type==2){%>
+
+                                <img src="<%=a.img_url%>">
+                                <img src="/qc_er?text=<%=a.ll_url%>" class="sd_xddf_xdff_xftx">
+                                <%}%>
+                    </div>
+
+
+                    <%})%>
+
+            </div>
+
+
+
+        </div>
+    </div>
+    <% include public/bottom %>
+        <script>
+            $(function() {
+                jQuery(".fullSlide").slide({
+                    titCell: ".hd ul", //轮播图的点点
+                    mainCell: ".bd ul",
+                    effect: "fold",
+                    delayTime:"1000",
+                    autoPlay: true,
+                    autoPage: true,
+                    trigger: "click",
+                    prevCell: ".sPrev", //上一页
+                    nextCell: ".sNext", //下一页
+                });
+                $(".duy_nav a").eq(0).addClass("act")
+            })
+
+        </script>
+        </body>
+
+        </html>

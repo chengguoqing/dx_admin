@@ -1,0 +1,36 @@
+<% include public/top %>
+
+
+    <div class="pt5 pl20">
+        <p class="fz18 pt10 pm10 bbm mt30">服务内容</p>
+
+        <div class="mt40 ds_xsd_xfgtxc">
+            <%if(fuwu){fuwu.map(function(a){%>
+                <p class="col-xs-6 mb20 pr sd_xsd_xdfttxc">
+                    <input type="text" placeholder="服务内容" class="form-control" value="<%=a.text%>">
+                    <i class="fa fa-close red fz20 sd_xclose_xdf"></i>
+                </p>
+                <%})} %>
+
+        </div>
+
+        <p class="qc pt20"></p>
+        <p class="col-xs-6">
+            <button class="btn btn-primary toianjias_xd">添加服务</button>
+
+            <button class="btn btn-success ml20 qw_xsd_xdttxc">确定</button>
+        </p>
+
+    </div>
+
+
+
+
+    <% include public/bootm %>
+        <script>
+            $(".ad_xsdffxsd_xd li").eq(1).addClass("act")
+
+        </script>
+        </body>
+
+        </html>

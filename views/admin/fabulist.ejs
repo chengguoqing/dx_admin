@@ -1,0 +1,86 @@
+<% include public/top %>
+
+
+
+    <div class="pt5 pl20">
+        <p class="fz18 pt10 pm10 bbm mt30">
+            <%=title%>
+        </p>
+
+
+        <p class="tr mt20 pm20">
+            <a class="btn  btn-primary btn-lg df_ds_sertxc" href="addfabu">添加案例</a>
+        </p>
+        <table class="table mt20 table-bordered">
+            <thead>
+                <tr>
+                    <td>id</td>
+                    <td>标题</td>
+                    <td>发布日期</td>
+                    <td>操作</td>
+                </tr>
+
+            </thead>
+            <tbody>
+                <% data.forEach(function(user){ %>
+                    <tr>
+                        <td>
+                            <%=user.id%>
+                        </td>
+                        <td>
+                            <%=user.title%>
+                        </td>
+                        <td>
+                            <%=user.time%>
+                        </td>
+                        <td style="width:300px">
+                            <% if (!user.lunbo==1) { %>
+                                <a data-id="<%=user.id%>" data-ty="1" class="sd_bnsd  ml20">设为banner</a>
+                                <% }else{%>
+                                    <a data-id="<%=user.id%>" data-ty="0" class="sd_bnsd  ml20">取消banner</a>
+                                    <% }%>
+                                        <a data-id="<%=user.id%>" class="bianji_ddffxdc ml20">编辑</a>
+                                        <a data-id="<%=user.id%>" class="dele_ddffxdc ml20">删除</a>
+
+                        </td>
+                    </tr>
+                    <% }) %>
+            </tbody>
+        </table>
+
+
+
+
+
+        <% include public/bootm %>
+            <script>
+                $(".ad_xsdffxsd_xd li").eq(5).addClass("act")
+                $(".dele_ddffxdc").on("click", function() { //删除
+                    var idx = $(this).attr("data-id"),
+                        sd_se = $(this)
+                    ajax("/delect_li_s", {
+                        id: idx
+                    }, function(data) {
+                        $(sd_se).parents("tr").remove()
+                    })
+                })
+                $(".bianji_ddffxdc").on("click", function() {
+                    var idx = $(this).attr("data-id")
+                    window.location.href = "fabu?id=" + idx
+                })
+
+                $(".sd_bnsd").on("click", function() {
+                    var idx = $(this).attr("data-id"),
+                        ty = $(this).attr("data-ty")
+                    ajax("/shebanner", {
+                        id: idx,
+                        ty: ty
+                    }, function(data) {
+                        location.reload();
+                    })
+                })
+
+            </script>
+            </body>
+
+            </html>

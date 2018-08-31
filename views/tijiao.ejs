@@ -1,0 +1,113 @@
+<% include public/top %>
+    <div class="wd mt20 du_xd_xdfcfx dsf_xdf_cftgxc">
+        <p class="fz24 pt10 pm10 bbm pl20 ">提交需求
+            <span class="fz12 zc ml10">(提交完毕，我们会第一时间联系您。)</span>
+        </p>
+
+
+        <div class=" df_xsd_xdgx mt60 pm20">
+            <div class="form-group mt10">
+                <label class="col-sm-3 control-label dsf_xsd_xdfx ab"><span class="red">*</span>服务内容：</label>
+                <div class="col-sm-9">
+                    <select class="form-control" id="ser_text">
+                        <% fuwu.map(function(a){%>
+                        <option  value="<%=a.text%>"><%=a.text%></option>
+                        <%})%>
+                    </select>
+                </div>
+                <p class="qc"></p>
+            </div>
+
+            <div class="form-group mt10">
+                <label class="col-sm-3 control-label dsf_xsd_xdfx ab"><span class="red">*</span>姓名/单位：</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" placeholder="请输入姓名/单位" id="ser_name">
+                </div>
+                <p class="qc"></p>
+            </div>
+
+
+            <div class="form-group mt10">
+                <label class="col-sm-3 control-label dsf_xsd_xdfx ab"><span class="red">*</span>手机：</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" placeholder="手机" id="ser_phone">
+                </div>
+                <p class="qc"></p>
+            </div>
+            <div class="form-group mt10">
+                <label class="col-sm-3 control-label dsf_xsd_xdfx ab">QQ：</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" placeholder="请输入QQ" id="ser_qq">
+                </div>
+                <p class="qc"></p>
+            </div>
+
+            <div class="form-group mt10">
+                <label class="col-sm-3 control-label dsf_xsd_xdfx ab"><span class="red">*</span> 期限和要求：</label>
+                <div class="col-sm-9">
+                    <textarea class="form-control" rows="6" placeholder="请输入项目完成期限、特殊要求。" id="ser_qixian"></textarea>
+                </div>
+                <p class="qc"></p>
+            </div>
+
+            <div class="form-group mt30">
+                <label class="col-sm-3 control-label dsf_xsd_xdfx ab">&nbsp;</label>
+                <div class="col-sm-9 df_ff_f_xcdfbtn">
+                    <button class="btn btn-primary df_xddf_xcfgxc">确认</button>
+                    <button class="btn btn-danger ml40">取消</button>
+                </div>
+                <p class="qc"></p>
+            </div>
+
+
+        </div>
+
+    </div>
+
+
+
+    <% include public/bottom %>
+        <script>
+            $(function() {
+                $(".duy_nav a").eq(2).addClass("act");
+                $(".df_xddf_xcfgxc").on("click", function() {
+                    var sd_xddff = []
+                    var ser_text = $("#ser_text").val(),
+                        ser_name = $("#ser_name").val().trim(),
+                        ser_phone = $("#ser_phone").val().trim(),
+                        ser_qq = $("#ser_qq").val().trim(),
+                        ser_qixian = $("#ser_qixian").val().trim()
+                    if (ser_name == "") {
+                        alert("请输入姓名");
+                        return;
+                    }
+                    if (ser_phone == "") {
+                        alert("请输入手机");
+                        return;
+                    }
+                    if (ser_qixian == "") {
+                        alert("请输入您的需求描述");
+                        return;
+                    }
+                    ser_qq = ser_qq == "" ? '没填QQ' : ser_qq
+                    sd_xddff.push('\"' + ser_text + '\"')
+                    sd_xddff.push('\"' + ser_name + '\"')
+                    sd_xddff.push('\"' + ser_phone + '\"')
+                    sd_xddff.push('\"' + ser_qq + '\"')
+                    sd_xddff.push('\"' + ser_qixian + '\"')
+                    var xuqiu = sd_xddff.join(",")
+                    ajax("/du_xuqiu", {
+                        xuqiu: xuqiu
+                    }, function(data) {
+                        alert(data.msg)
+                        location.reload()
+                    })
+
+
+                })
+            })
+
+        </script>
+        </body>
+
+        </html>

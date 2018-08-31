@@ -1,0 +1,46 @@
+<% include public/top %>
+
+
+
+    <div class="pt5 pl20">
+        <p class="fz18 pt10 pm10 bbm mt30">
+            <%=title%>
+        </p>
+
+        <p class="df_d_drsdrt">
+            <img src="<%=path%>">
+        </p>
+
+        <div class="mt30 ml100">
+            <div id="d_df_sder" class="fl">选择图片</div>
+            <button class="btn fl dsf_de_dsrrxc"> 确认</button>
+        </div>
+
+    </div>
+
+
+    <% include public/bootm %>
+        <script>
+            var banner = ""
+            $(".ad_xsdffxsd_xd li").eq(3).addClass("act")
+            upimg('#d_df_sder', '/upimg', "", function(file, data) {
+                $(".df_d_drsdrt img").attr("src", data.path)
+                banner = data.path
+            })
+
+            $(".dsf_de_dsrrxc").on("click", function() {
+                if (banner) {
+                    ajax("/admin/fmsc", {
+                        banner: banner
+                    }, function(data) {
+                        alert(data.msg)
+                    })
+                } else {
+                    alert("请上传图片")
+                }
+            })
+
+        </script>
+        </body>
+
+        </html>
