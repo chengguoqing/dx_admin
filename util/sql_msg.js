@@ -1,4 +1,5 @@
 var express = require('express');
+var comm = require('../routes/comm');
 var mysql = require('mysql');
 var d_iu = {
     host: 'localhost',
@@ -36,15 +37,53 @@ function sql(sql, suc, res) {
     });
 }
 
-exports.select = function (name, call_back, res) {
-    sql("SELECT * FROM " + name, function (data) {
+exports.select = function (name, res) {
+    sql("SELECT * FROM " + name + " ORDER BY id DESC", function (data) {
         var data_e = {}
         data_e.code = 0
         data_e.msg = "请求成功"
         data_e.data = data
-        call_back(data_e)
+        res.json(data_e)
     }, res)
 }
+exports.select_w = function (name, from_ert, res, call_back) {
+    from_ert = comm.parseParam(from_ert,1)
+
+    sql(`SELECT * FROM  ${name}   WHERE ${from_ert} `, function (data) {
+        var data_e = {}
+        data_e.code = 0
+        data_e.msg = "请求成功"
+        data_e.data = data
+        
+        if (data.length <= 0) {
+            data_e.code = -1
+            data_e.msg = "数据为空！"
+            res.json(data_e)
+            return
+        }
+       
+        try {
+            call_back(data[0])
+        } catch (e) {
+            res.json(data_e)
+        }
+
+
+    })
+}
+exports.del_w = function (name, from_ert, res) {
+    from_ert = comm.parseParam(from_ert)
+   
+    sql(`DELETE FROM ${name} WHERE ${from_ert}`, function (data) {
+        var data_e = {}
+        data_e.code = 0
+        data_e.msg = "删除成功！"
+        data_e.data = data
+        res.json(data_e)
+    })
+}
+
+
 /**
 调用示列
 user=表名
@@ -54,7 +93,7 @@ user_info json对象
 
     }, res)
 **/
-exports.add = function (name, from_ert, call_back, res) {
+exports.add = function (name, from_ert, res) {
     var sd_zsd_a = [],
         sd_zsd_b = []
     for (var key in from_ert) {
@@ -70,9 +109,22 @@ exports.add = function (name, from_ert, call_back, res) {
         data_e.code = 0
         data_e.msg = "添加成功"
         res.json(data_e)
-        call_back(data_e)
     }, res)
 }
+
+
+
+
+/**
+    var user_info = {}
+    user_info.hyy = req.body.hyy
+    user_info.jiesao = req.body.jiesao
+    user_info.phone = req.body.phone
+    user_info.weixin = req.body.weixin
+    user_info.fengmian = req.body.fengmian
+    user_info.banner = req.body.banner 
+    dx_sql.xiugai('user', user_info, 'id=1', res)
+**/
 
 exports.xiugai = function (name, from_ert, where, res) {
     var sd_zsd_c = []

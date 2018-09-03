@@ -23,7 +23,6 @@ exports.up_img = function (req, res, suc) {
 }
 
 exports.ajax_e = function (url, sd_sddf, da_ta, call) {
-    console.log(JSON.stringify(da_ta))
     request.post({
         url: url,
         form: da_ta
@@ -65,7 +64,28 @@ exports.randomnum = function (len) {
 }
 
 
+//对象转地址
+exports.parseParam = function (data,ty) {
+    var _result = [];
+    for (var key in data) {
+        var value = data[key];
+        if (value.constructor == Array) {
+            value.forEach(function (_value) {
+                _result.push(key + '="' + value+'"');
+            });
+        } else {
+            _result.push(key + '="' + value+'"');
+        }
+    }
 
+   if(ty==1){
+       
+       return _result.join(' and '); 
+    }else{
+          
+         return _result.join('&');
+    }
+};
 exports.assign_dsdf = function (jsonbject1, jsonbject2) {
     var resultJsonObject = {};
     for (var attr in jsonbject1) {
@@ -141,7 +161,7 @@ exports.mix = function () {
 exports.zx = function (data) {
     var stringA = Object.keys(data),
         s_sdfs = ""
-//    stringA.sort()
+    //    stringA.sort()
     stringA.map(function (a) {
         s_sdfs += "&" + a + "=" + data[a]
     })
