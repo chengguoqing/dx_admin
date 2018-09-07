@@ -17,13 +17,13 @@ router.get('/', function (req, res, next) {
 /**
  * @api {post} /load_in 后台登录
  * @apiGroup admin
- *
+* @apiParam {String} token token(必填)
  * @apiParam {String} phone 用户的电话 
  * @apiParam {String} user_password 用户的密码
  *
  * @apiSuccess {String} code 状态码.
  * @apiSuccess {String} msg  状态信息.
- * @apiSuccess {String} token  验证接口的参数.
+* @apiSuccess {String} token  验证接口的参数.
  
  */
 
@@ -55,7 +55,7 @@ router.post('/out_load_in', function (req, res, next) {
 /**
  * @api {post} /set_user 设置店主的信息
  * @apiGroup admin
- *
+* @apiParam {String} token token(必填)
  * @apiParam {String} hyy 欢迎语.
  * @apiParam {String} jiesao 介绍语.
 * @apiParam {String} phone 电话.
@@ -66,7 +66,7 @@ router.post('/out_load_in', function (req, res, next) {
  *
  * @apiSuccess {String} code 状态码.
  * @apiSuccess {String} msg  状态信息.
- * @apiSuccess {String} token  验证接口的参数.
+ * 
  
  */
 router.post('/set_user', function (req, res, next) {
@@ -84,10 +84,10 @@ router.post('/set_user', function (req, res, next) {
 /**
  * @api {get} /get_user 获取店主的信息
  * @apiGroup admin
- *
+* @apiParam {String} token token(必填)
  * @apiSuccess {String} code 状态码.
  * @apiSuccess {String} msg  状态信息.
- * @apiSuccess {String} token  验证接口的参数.
+ * 
  
   * @apiSuccess {Object[]} data 数据.
   * @apiSuccess {String} data.hyy 欢迎语.
@@ -107,7 +107,7 @@ router.get('/get_user', function (req, res, next) {
 /**
  * @api {post} /add_cp 添加产品
  * @apiGroup admin
- *
+* @apiParam {String} token token(必填)
  * @apiParam {String} fengmian 封面
  * @apiParam {String} leixing 类型 1pc 2手机 3app
  * @apiParam {String} leixing_text 类型中文
@@ -119,7 +119,7 @@ router.get('/get_user', function (req, res, next) {
  *
  * @apiSuccess {String} code 状态码.
  * @apiSuccess {String} msg  状态信息.
- * @apiSuccess {String} token  验证接口的参数.
+ * 
  
  */
 
@@ -142,10 +142,10 @@ router.post('/add_cp', function (req, res, next) {
 /**
  * @api {post} /get_cp 获取所有产品
  * @apiGroup admin
- *
+ * @apiParam {String} token token(必填)
  * @apiSuccess {String} code 状态码.
  * @apiSuccess {String} msg  状态信息.
- * @apiSuccess {String} token  验证接口的参数.
+ * 
  * @apiSuccess {Object[]} data 数据
  * @apiSuccess {String} data.fengmian 封面
  * @apiSuccess {String} data.leixing 类型 1pc 2手机 3app
@@ -163,15 +163,16 @@ router.post('/get_cp', function (req, res, next) {
 })
 
 /**
- * @api {post} /get_cp_w 获取产品 加条件的
+ * @api {post} /get_cp_w 获取产品_加条件
  * @apiGroup admin
+ * @apiParam {String} token token(必填)
  * @apiParam {String} id 产品id
  * @apiParam {String} leixing 类型 1pc 2手机 3app
  * @apiParam {String} is_index 是否首页推荐 0不是 1是
  *
  * @apiSuccess {String} code 状态码.
  * @apiSuccess {String} msg  状态信息.
- * @apiSuccess {String} token  验证接口的参数.
+ * 
  * @apiSuccess {Object[]} data 数据
  * @apiSuccess {String} data.fengmian 封面
  * @apiSuccess {String} data.leixing 类型 1pc 2手机 3app
@@ -195,8 +196,9 @@ router.post('/get_cp_w', function (req, res, next) {
 
 
 /**
- * @api {post} /get_cp_w 修改产品
+ * @api {post} /xiugai_cp_w 修改产品
  * @apiGroup admin
+ * @apiParam {String} token token(必填)
  * @apiParam {String} id 产品id
  * @apiParam {String} type type=1设置首页推荐
  * @apiParam {String} fengmian 封面
@@ -210,7 +212,7 @@ router.post('/get_cp_w', function (req, res, next) {
  *
  * @apiSuccess {String} code 状态码.
  * @apiSuccess {String} msg  状态信息.
- * @apiSuccess {String} token  验证接口的参数.
+ * 
  * @apiSuccess {Object[]} data 数据
  * @apiSuccess {String} data.fengmian 封面
  * @apiSuccess {String} data.leixing 类型 1pc 2手机 3app
@@ -248,12 +250,12 @@ router.post('/xiugai_cp_w', function (req, res, next) {
 /**
  * @api {post} /delect_er 删除产品
  * @apiGroup admin
- *
- * @apiParam {String} id 产品id
+* @apiParam {String} token token(必填)
+ * @apiParam {String} id 产品id(必填)
  *
  * @apiSuccess {String} code 状态码.
  * @apiSuccess {String} msg  状态信息.
- * @apiSuccess {String} token  验证接口的参数.
+ * 
  
  */
 
@@ -305,7 +307,7 @@ router.post('/up_img', function (req, res, next) {
  *
  * @apiSuccess {String} code 状态码.
  * @apiSuccess {String} msg  状态信息.
- * @apiSuccess {String} token  验证接口的参数.
+ * 
  
  */
 router.post('/add_xuqiu', function (req, res, next) {
@@ -322,11 +324,11 @@ router.post('/add_xuqiu', function (req, res, next) {
 /**
  * @api {post} /add_xuqiu 获取需求
  * @apiGroup admin
- *
- 
+
+ * @apiParam {String} token token(必填)
  * @apiSuccess {String} code 状态码.
  * @apiSuccess {String} msg  状态信息.
- * @apiSuccess {String} token  验证接口的参数.
+ * 
    * @apiSuccess {Object[]} data 数据
   * @apiSuccess {String} data.phone 电话
   * @apiSuccess {String} data.weixin 微信
