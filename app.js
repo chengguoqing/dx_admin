@@ -20,7 +20,7 @@ app.use(bodyParser.urlencoded({
 
 
 
-app.all('*', function (req, res, next) {
+app.all('*', function (req, res, next) { 
     res.header('Access-Control-Allow-Origin', '*');
     res.header('Access-Control-Allow-Headers', 'Content-Type,Content-Length, Authorization, Accept, X-Requested-With , yourHeaderFeild');
     res.header('Access-Control-Allow-Methods', 'PUT, POST, GET, DELETE,OPTIONS');
@@ -35,22 +35,24 @@ app.all('*', function (req, res, next) {
             next();
             return
         }
-    
+
+ 
+
         try {
-          
-            if (!token.decodeToken(req.body.token||'')) {
+
+            if (!token.decodeToken(req.body.token)) {
                 res.json({
                     code: "-1",
                     msg: "token过期或错误1"
                 })
                 return
-            } 
+            }
 
         } catch (e) {
 
         }
         try {
-            if (!token.decodeToken(req.query.token||'')) {
+            if (!token.decodeToken(req.query.token)) {
                 res.json({
                     code: "-1",
                     msg: "token过期或错误2"
@@ -74,7 +76,7 @@ app.use('/', index);
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
     var err = new Error('Not Found');
-    err.status = 404;
+    err.status = 404; 
     res.render('404')
 });
 
