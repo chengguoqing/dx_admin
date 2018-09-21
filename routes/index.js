@@ -10,7 +10,7 @@ var md5 = require('md5');
 var request = require('request');
 var xml2js = require('xml2js');
 var urlToImage = require('url2img');
-var sender = require('./SmsSender');
+var sender = require('./SmsSender'); 
 sender.config.sdkappid = 1400046691;
 sender.config.appkey = '69e8f1574cc92cb690bfa63a8d39a05c';
 
@@ -449,7 +449,7 @@ router.get('/qc_er', function (req, res, next) {
 //})
 
 
-
+ 
 
 router.get("/qianming", function (req, res, next) {
     var sd_sdf = {},

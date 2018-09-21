@@ -4,7 +4,8 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var index = require('./routes/new_index');
+var index = require('./routes/index');
+var new_index = require('./routes/new_index');
 var https = require('https');
 var token = require('./util/token');
 var fs = require('fs');
@@ -20,7 +21,7 @@ app.use(bodyParser.urlencoded({
 
 
 
-app.all('*', function (req, res, next) { 
+app.all('*', function (req, res, next) {
     res.header('Access-Control-Allow-Origin', '*');
     res.header('Access-Control-Allow-Headers', 'Content-Type,Content-Length, Authorization, Accept, X-Requested-With , yourHeaderFeild');
     res.header('Access-Control-Allow-Methods', 'PUT, POST, GET, DELETE,OPTIONS');
@@ -31,12 +32,12 @@ app.all('*', function (req, res, next) {
 
         res.send(200);
     } else {
-        if (req.originalUrl == "/load_in") {
+        if (req.originalUrl == "/new/load_in") {
             next();
             return
         }
 
- 
+
 
         try {
 
@@ -71,12 +72,14 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
+app.use('/new/', new_index);
+
 
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
     var err = new Error('Not Found');
-    err.status = 404; 
+    err.status = 404;
     res.render('404')
 });
 
@@ -93,13 +96,13 @@ app.use(function (err, req, res, next) {
 /* */
 
 
-//var httpsServer = https.createServer({
-//    key: fs.readFileSync('./3_www.duxinggj.com.key', 'utf8'),
-//    cert: fs.readFileSync('./2_www.duxinggj.com.crt', 'utf8')
-//}, app);
-//
-//httpsServer.listen(443, function () {
-//    console.log('HTdfdsgfdg running on: https://localhost:%s', 443);
-//});
+var httpsServer = https.createServer({
+    key: fs.readFileSync('./3_www.duxinggj.com.key', 'utf8'),
+    cert: fs.readFileSync('./2_www.duxinggj.com.crt', 'utf8')
+}, app);
+
+httpsServer.listen(443, function () {
+    console.log('HTdfdsgfdg running on: https://localhost:%s', 443);
+});
 module.exports = app;
-app.listen(8084)
+app.listen(80)

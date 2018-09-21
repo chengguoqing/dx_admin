@@ -47,21 +47,21 @@ exports.select = function (name, res) {
     }, res)
 }
 exports.select_w = function (name, from_ert, res, call_back) {
-    from_ert = comm.parseParam(from_ert,1)
+    from_ert = comm.parseParam(from_ert, 1)
 
     sql(`SELECT * FROM  ${name}   WHERE ${from_ert} ORDER BY id DESC`, function (data) {
         var data_e = {}
         data_e.code = 0
         data_e.msg = "请求成功"
         data_e.data = data
-        
+
         if (data.length <= 0) {
             data_e.code = -1
             data_e.msg = "数据为空！"
             res.json(data_e)
             return
         }
-       
+
         try {
             call_back(data[0])
         } catch (e) {
@@ -73,7 +73,7 @@ exports.select_w = function (name, from_ert, res, call_back) {
 }
 exports.del_w = function (name, from_ert, res) {
     from_ert = comm.parseParam(from_ert)
-   
+
     sql(`DELETE FROM ${name} WHERE ${from_ert}`, function (data) {
         var data_e = {}
         data_e.code = 0
@@ -93,22 +93,29 @@ user_info json对象
 
     }, res)
 **/
-exports.add = function (name, from_ert, res) {
+exports.add = function (name, from_ert, res, callback) {
     var sd_zsd_a = [],
         sd_zsd_b = []
     for (var key in from_ert) {
-      
-            sd_zsd_a.push(key)
-            sd_zsd_b.push('"' + from_ert[key] + '"')
-        
+
+        sd_zsd_a.push(key)
+        sd_zsd_b.push('"' + from_ert[key] + '"')
+
     }
     sd_zsd_a = sd_zsd_a.join(",")
     sd_zsd_b = sd_zsd_b.join(",")
     sql(`INSERT INTO ${name} (${sd_zsd_a}) VALUES(${sd_zsd_b})`, function (data) {
         var data_e = {}
-        data_e.code = 0
-        data_e.msg = "添加成功"
-        res.json(data_e)
+
+        try {
+            callback()
+        } catch (e) {
+            data_e.code = 0
+            data_e.msg = "添加成功"
+            res.json(data_e)
+        }
+
+
     }, res)
 }
 
@@ -129,9 +136,9 @@ exports.add = function (name, from_ert, res) {
 exports.xiugai = function (name, from_ert, where, res) {
     var sd_zsd_c = []
     for (var key in from_ert) {
-       
-            sd_zsd_c.push(key + '="' + from_ert[key] + '"')
-       
+
+        sd_zsd_c.push(key + '="' + from_ert[key] + '"')
+
     }
     sd_zsd_c = sd_zsd_c.join(",");
     console.log(`UPDATE ${name}  SET ${sd_zsd_c} WHERE ${where}`);
